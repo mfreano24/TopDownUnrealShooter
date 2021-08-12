@@ -64,6 +64,14 @@ AMechanicsCharacter::AMechanicsCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
 
+	
+}
+
+void AMechanicsCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	Collectibles = 0;
 	MaxHealth = 3;
 	CurrentHealth = MaxHealth;
 }
@@ -115,10 +123,23 @@ int AMechanicsCharacter::Damage(AActor* Shooter)
 	CurrentHealth--;
 	if (CurrentHealth <= 0) {
 		//die
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, "YOU DIED");
 	}
 	return CurrentHealth;
 }
 
+
+int AMechanicsCharacter::AddNewCollectible()
+{
+	return ++Collectibles;
+}
+
+int AMechanicsCharacter::EmptyAllCollectibles()
+{
+	int ret = Collectibles;
+	Collectibles = 0;
+	return ret;
+}
 
 void AMechanicsCharacter::MoveForward(float scale)
 {

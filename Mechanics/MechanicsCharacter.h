@@ -13,6 +13,8 @@ class AMechanicsCharacter : public ACharacter
 
 public:
 	AMechanicsCharacter();
+	
+	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaSeconds) override;
 
@@ -31,6 +33,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	int Damage(AActor* Shooter);
+
+	UFUNCTION(BlueprintCallable)
+	int AddNewCollectible();
+
+	UFUNCTION(BlueprintCallable)
+	int EmptyAllCollectibles();
 
 private:
 	/** Top down camera */
@@ -63,6 +71,9 @@ protected:
 	UPROPERTY()
 	int CurrentHealth;
 
+	UPROPERTY()
+	int Collectibles;
+
 	UFUNCTION()
 	void FireProjectile();
 
@@ -71,6 +82,8 @@ protected:
 
 	UFUNCTION()
 	void MoveRight(float scale);
+
+	
 
 };
 
